@@ -7,8 +7,7 @@ const mongoose = require('mongoose');
 /*
 datos locales*/
 
-
-
+mongoose.set("strictQuery", false);
 mongoose.connect('mongodb://localhost/CeibaSol', { useNewUrlParser: true })
     .then(() => console.log('Conexion correcta BD'))
     .catch((err) => console.log(`ERROR to connect : ${err.message}`));
