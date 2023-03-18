@@ -2,12 +2,14 @@ const {Router} = require('express');
 const router = Router();
 const { authenticateToken } = require("../helper/jwt");
 
-const {crearServicio, listarServicios, eliminarServicio, actualizarServicio} = require('../controller/service') 
+const {crearServicio, listarServicios, verServicio, eliminarServicio, actualizarServicio} = require('../controller/service') 
 
 //crear servicio
 router.post('/crearServicio',[authenticateToken], crearServicio);
-//listar servicios
+//listar todos los servicios
 router.get('/listarServicios', listarServicios);
+//ver un servicio
+router.get('/verServicio', verServicio);
 //eliminar servicio
 router.delete('/eliminarServicio',[authenticateToken], eliminarServicio);
 //actualizar servicio

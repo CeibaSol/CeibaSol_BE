@@ -11,7 +11,7 @@ const enviarCorreo = async (req, res) => {
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>Correo de prueba</title>
+        <title>Correo</title>
         <style>
             /* Estilos CSS */
             body {
@@ -33,8 +33,7 @@ const enviarCorreo = async (req, res) => {
         </style>
     </head>
     <body>
-
-
+    
         <img class="pequeña" src="https://i.imgur.com/b3AJFOU.png"/>
         <h1>CONTACTO CEIBASOL S.A.S.</h1>
         <p>Hola soy <strong>${nombre}</strong></p>
@@ -51,11 +50,15 @@ const enviarCorreo = async (req, res) => {
 
   transporter.sendMail(email, (error, info) => {
     if (error) {
-      console.log(error);
-      res.send("Error al enviar el correo electrónico");
+      return res.status(400).json({
+        succes: false,
+        err: "Error al enviar el correo electrónico",
+      });
     } else {
-      console.log("Correo electrónico enviado: " + info.response);
-      res.send("Correo electrónico enviado correctamente");
+      return res.status(200).json({
+        succes: true,
+        message: "Correo electrónico enviado correctamente",
+      });
     }
   });
 };
