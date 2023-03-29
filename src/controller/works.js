@@ -29,7 +29,38 @@ const crearTrabajo = async (req, res) => {
     }
 };
 
-const listarTrabajo = async (req, res) => { }
+const listarTrabajos = async (req, res) => {
+    try {
+        const trabajos = await works.find();
+        return res.status(200).json({
+            succes: true,
+            trabajos,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            succes: false,
+            error: error.message,
+        });
+    }
+};
+
+const verTrabajo = async (req, res) => {
+
+    const { nameWork } = req.body;
+
+    try {
+        const trabajo = await works.findOne({ nameWork });
+        return res.status(200).json({
+            succes: true,
+            trabajo,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            succes: false,
+            error: error.message,
+        });
+    }
+};
 
 const eliminarTrabajo = async (req, res) => { }
 
@@ -38,7 +69,8 @@ const actualizarTrabajo = async (req, res) => { }
 
 module.exports = {
     crearTrabajo,
-    listarTrabajo,
+    listarTrabajos,
+    verTrabajo,
     eliminarTrabajo,
     actualizarTrabajo
 

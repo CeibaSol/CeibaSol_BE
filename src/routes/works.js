@@ -1,12 +1,14 @@
 const { Router } = require('express');
 const router = Router();
 
-const { crearTrabajo, listarTrabajo, eliminarTrabajo, actualizarTrabajo } = require('../controller/works')
+const { crearTrabajo, listarTrabajos, verTrabajo, eliminarTrabajo, actualizarTrabajo } = require('../controller/works')
 
 //crear trabajo relizado
 router.post('/crearTrabajo', crearTrabajo);
 //listar trabajo relizado
-router.get('/listarTrabajo', listarTrabajo);
+router.get('/listarTrabajos', listarTrabajos);
+//ver un trabajo realizado
+router.get('/verTrabajo', verTrabajo);
 //eliminar trabajo relizado
 router.delete('/eliminarTrabajo', eliminarTrabajo);
 //actualizar trabajo relizado
