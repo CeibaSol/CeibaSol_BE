@@ -1,12 +1,39 @@
 const works = require("../models/works");
 
-const crearTrabajo = async (req, res) =>{}
+const crearTrabajo = async (req, res) => {
+    const { nameWork, description, linkImg } = req.body;
 
-const listarTrabajo = async (req, res) =>{}
+    try {
+        let newWork = await works.findOne({ nameWork });
 
-const eliminarTrabajo = async (req, res) =>{}
+        if (newWork) {
+            return res.status(400).json({
+                succes: false,
+                error: "Ese trabajo ya existe",
+            });
+        }
 
-const actualizarTrabajo = async (req, res) =>{}
+        newWork = new works(req.body);
+        await newWork.save();
+
+        return res.status(200).json({
+            succes: true,
+            newWork,
+            message: "Trabajo creado",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            succes: false,
+            error: error.message,
+        });
+    }
+};
+
+const listarTrabajo = async (req, res) => { }
+
+const eliminarTrabajo = async (req, res) => { }
+
+const actualizarTrabajo = async (req, res) => { }
 
 
 module.exports = {
