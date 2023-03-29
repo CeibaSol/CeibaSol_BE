@@ -62,9 +62,54 @@ const verTrabajo = async (req, res) => {
     }
 };
 
-const eliminarTrabajo = async (req, res) => { }
+const eliminarTrabajo = async (req, res) => {
+    const { nameWork } = req.body;
 
-const actualizarTrabajo = async (req, res) => { }
+    try {
+        const deleteWork = await works.findOneAndDelete({ nameWork });
+
+        return res.status(200).json({
+            succes: true,
+            deleteWork,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            succes: false,
+            error: error.message,
+        });
+    }
+};
+
+const actualizarTrabajo = async (req, res) => {
+    const { nameWork, description, linkImg } = req.body;
+
+    try {
+        let findWork = await works.findOne({ nameWork });
+
+        if (findWork) {
+            const worksUpdate = await works.findOneAndUpdate(
+                { nameWork },
+                req.body,
+                {
+                    new: true,
+                }
+            );
+            return res.status(200).json({
+                succes: true,
+                worksUpdate,
+            });
+        }
+        return res.status(400).json({
+            succes: false,
+            error: "Ese trabajo no existe",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            succes: false,
+            error: error.message,
+        });
+    }
+};
 
 
 module.exports = {
