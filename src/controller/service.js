@@ -45,11 +45,10 @@ const listarServicios = async (req, res) => {
 };
 
 const verServicio = async (req, res) => {
-  
-  const { nameService } = req.body;
+  const { serviceId } = req.query;
 
   try {
-    const servicio = await service.findOne({ nameService });
+    const servicio = await service.findById({ _id: serviceId });
     return res.status(200).json({
       succes: true,
       servicio,
@@ -63,10 +62,10 @@ const verServicio = async (req, res) => {
 };
 
 const eliminarServicio = async (req, res) => {
-  const { nameService } = req.body;
+  const { serviceId } = req.body;
 
   try {
-    const deleteItem = await service.findOneAndDelete({ nameService });
+    const deleteItem = await service.findByIdAndRemove({ _id: serviceId });
 
     return res.status(200).json({
       succes: true,
@@ -81,14 +80,14 @@ const eliminarServicio = async (req, res) => {
 };
 
 const actualizarServicio = async (req, res) => {
-  const { nameService, subService, linkImg } = req.body;
+  const { serviceId, nameService, subService, linkImg } = req.body;
 
   try {
-    let find = await service.findOne({ nameService });
+    let find = await service.findById({ _id: serviceId });
 
     if (find) {
       const servicioUpdate = await service.findOneAndUpdate(
-        { nameService },
+        { _id: serviceId },
         req.body,
         {
           new: true,
