@@ -11,7 +11,7 @@ router.get('/listarTrabajos', listarTrabajos);
 //ver un trabajo realizado
 router.get('/verTrabajo', verTrabajo);
 //eliminar trabajo relizado
-router.delete('/eliminarTrabajo', [authenticateToken], eliminarTrabajo);
+router.delete('/eliminarTrabajo/:workId', [authenticateToken], eliminarTrabajo);
 //actualizar trabajo relizado
 router.put('/actualizarTrabajo', [authenticateToken], actualizarTrabajo);
 

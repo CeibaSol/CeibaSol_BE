@@ -62,7 +62,7 @@ const verServicio = async (req, res) => {
 };
 
 const eliminarServicio = async (req, res) => {
-  const { serviceId } = req.body;
+  const { serviceId } = req.params;
 
   try {
     const deleteItem = await service.findByIdAndRemove({ _id: serviceId });

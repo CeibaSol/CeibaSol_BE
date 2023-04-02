@@ -11,7 +11,7 @@ router.get('/listarServicios', listarServicios);
 //ver un servicio
 router.get('/verServicio', verServicio);
 //eliminar servicio
-router.delete('/eliminarServicio', [authenticateToken], eliminarServicio);
+router.delete('/eliminarServicio/:serviceId', [authenticateToken], eliminarServicio);
 //actualizar servicio
 router.put('/actualizarServicio', [authenticateToken], actualizarServicio);
 

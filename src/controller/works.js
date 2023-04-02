@@ -62,7 +62,7 @@ const verTrabajo = async (req, res) => {
 };
 
 const eliminarTrabajo = async (req, res) => {
-  const { workId } = req.body;
+  const { workId } = req.params;
 
   try {
     const deleteWork = await works.findByIdAndRemove({ _id: workId });
